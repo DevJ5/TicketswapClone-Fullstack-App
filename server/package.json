@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "build/index.js",
   "license": "MIT",
   "scripts": {
     "start": "node .",
@@ -16,6 +16,7 @@
     "@types/koa-router": "^7.0.32",
     "bcrypt": "^3.0.2",
     "jsonwebtoken": "^8.3.0",
+    "kcors": "^2.2.2",
     "koa": "^2.6.1",
     "koa-bodyparser": "^4.2.1",
     "koa-multer": "^1.0.2",
