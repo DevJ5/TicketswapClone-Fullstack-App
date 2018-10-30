@@ -4,3 +4,5 @@ Solution is not to use database errors, but use validation library instead (like
 
 - Minlength aanzetten bij password.
 - Get all events dingen verwijderen.
+
+export default connect(mapStateToProps, {getEvent, deleteEvent})(withStyles(styles)(EventDetails));

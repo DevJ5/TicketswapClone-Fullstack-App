@@ -22,7 +22,7 @@ export default class TicketController {
     // const tickets = await Ticket.findAndCount({ select: ['price'], where: "event_id = 13"});
     const tickets = await Ticket.findAndCount();
     //return { tickets: tickets[1] };
-    return {tickets}
+    return tickets
   }
 
   @Get('/events/:eventId/tickets/:ticketId')
