@@ -10,11 +10,12 @@ class EventDetailsContainer extends Component {
     this.props.getSingleEvent(eventId);
   }
   render() {
+    const eventId = this.props.match.params.id;
     if (!this.props.eventDetails) return null;
     return (
       <div>
         <EventDetails eventDetails={this.props.eventDetails} />
-        <TicketListContainer />
+        <TicketListContainer eventId={eventId} />
       </div>
     );
   }

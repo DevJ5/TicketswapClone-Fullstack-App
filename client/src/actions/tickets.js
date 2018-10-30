@@ -8,9 +8,9 @@ const setTickets = tickets => ({
   payload: tickets
 });
 
-export const getAllTickets = () => dispatch => {
+export const getAllTickets = eventId => dispatch => {
   request
-    .get(`${baseUrl}/events/:eventId/tickets`)
+    .get(`${baseUrl}/events/${eventId}/tickets`) // WE NEED EVENTID AS AN ARGUMENT
     .then(res => dispatch(setTickets(res.body)))
     .catch(err => console.error(err));
 };

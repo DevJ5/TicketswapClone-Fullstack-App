@@ -44,7 +44,7 @@ export default class Event extends BaseEntity {
   @ManyToOne(_ => User, user => user.events)
   user: User;
 
-  @OneToMany(_ => Ticket, ticket => ticket.user)
+  @OneToMany(_ => Ticket, ticket => ticket.event)
   tickets: Ticket;
 
   @OneToMany(_ => Comment, comment => comment.event)

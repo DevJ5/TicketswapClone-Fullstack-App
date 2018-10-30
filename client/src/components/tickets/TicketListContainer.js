@@ -5,21 +5,22 @@ import TicketList from './TicketList';
 
 class TicketListContainer extends Component {
   componentDidMount() {
-    this.props.getAllTickets();
+    this.props.getAllTickets(this.props.eventId);
   }
 
   render() {
-    if (!this.props.tickets) return null;
+    console.log('something?', this.props);
+    if (!this.props.ticketsPerEvent) return null;
     return (
       <div>
-        <TicketList tickets={this.props.tickets} />
+        <TicketList ticketsPerEvent={this.props.ticketsPerEvent} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  tickets: state.tickets
+  ticketsPerEvent: state.ticketsPerEvent
 });
 
 export default connect(

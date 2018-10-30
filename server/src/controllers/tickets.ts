@@ -17,12 +17,13 @@ import Ticket from '../entities/Ticket';
 
 @JsonController()
 export default class TicketController {
-  @Get('/events/:id/tickets')
-  async getAllTickets() {
+  @Get('/events/:eventId/tickets')
+  async getAllTickets(@Param('eventId') eventId: number) {
     // const tickets = await Ticket.findAndCount({ select: ['price'], where: "event_id = 13"});
-    const tickets = await Ticket.findAndCount();
+    //const tickets = await Ticket.findAndCount();
     //return { tickets: tickets[1] };
-    return tickets
+    const event = await Event.findOne(eventId, {relations: ['tickets']});
+    return event;
   }
 
   @Get('/events/:eventId/tickets/:ticketId')
@@ -72,6 +73,6 @@ export default class TicketController {
     const ticket = await Ticket.findOne(ticketId);
     if (!ticket) throw new BadRequestError('Ticket does not exist');
 
-    return Ticket.remove(ticket)
+    return Ticket.remove(ticket);
   }
 }

@@ -6,10 +6,13 @@ export default function TicketList(props) {
   return (
     <div>
       <ul>
-        {props.tickets[0].map(ticket => (
+        {props.ticketsPerEvent.tickets.map(ticket => (
           <li key={ticket.id}>
-            <Link to={`/events/:eventId/${ticket.id}`}>
-              {ticket.description}
+            <Link
+              to={`/events/${props.ticketsPerEvent.id}/tickets/${ticket.id}`}>
+              <span>{ticket.description}</span>
+              <span>{ticket.price}</span>
+              <span>{ticket.pictureUrl}</span>
             </Link>
           </li>
         ))}
