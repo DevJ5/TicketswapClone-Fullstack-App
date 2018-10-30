@@ -15,6 +15,7 @@ try {
 export default (state = initState, action) => {
   switch (action.type) {
     case USER_LOGIN_SUCCESS:
+      console.log('Reducer userloginsucces', action.payload);
       return { jwt: action.payload };
 
     case USER_LOGOUT:

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Loginform from './LoginForm';
 import { login } from '../../actions/users';
 import { connect } from 'react-redux';
@@ -15,7 +14,14 @@ class Loginpage extends Component {
     if (this.props.currentUser) return <Redirect to="/events" />;
     return (
       <div>
-        {!this.props.signup.success && <Link to="/signup">Signup</Link>}
+        {!this.props.signup.success && (
+          <button
+            onClick={() => {
+              this.props.history.push('/signup');
+            }}>
+            Signup
+          </button>
+        )}
         <Loginform onSubmit={this.handleSubmit} />
       </div>
     );

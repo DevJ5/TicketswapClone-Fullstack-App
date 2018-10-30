@@ -17,10 +17,10 @@ import Event from '../entities/Event';
 export default class EventController {
   @Get('/events')
   async getAllEvents(@CurrentUser() user) {
-    const { password, ...rest } = user;
-    console.log(rest); // Still to remove
+    //const { password, ...rest } = user;
+    //console.log(rest); // Still to remove
     const events = await Event.find(); // { select: ['name'] }
-    return { events };
+    return  events ;
   }
 
   @Get('/events/:id')
