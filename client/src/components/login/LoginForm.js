@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-export default class Signup extends Component {
+export default class Loginform extends Component {
   state = {};
 
-  handleInputChange = e => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -13,8 +13,6 @@ export default class Signup extends Component {
     e.preventDefault();
     this.props.onSubmit(this.state);
     this.setState({
-      firstName: '',
-      lastName: '',
       email: '',
       password: ''
     });
@@ -25,29 +23,11 @@ export default class Signup extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <label>
-            First name:
-            <input
-              type="text"
-              name="firstName"
-              onChange={this.handleInputChange}
-              value={this.state.firstName || ''}
-            />
-          </label>
-          <label>
-            Last name:
-            <input
-              type="text"
-              name="lastName"
-              onChange={this.handleInputChange}
-              value={this.state.lastName || ''}
-            />
-          </label>
-          <label>
             Email:
             <input
               type="text"
               name="email"
-              onChange={this.handleInputChange}
+              onChange={this.handleChange}
               value={this.state.email || ''}
             />
           </label>
@@ -56,11 +36,11 @@ export default class Signup extends Component {
             <input
               type="password"
               name="password"
-              onChange={this.handleInputChange}
+              onChange={this.handleChange}
               value={this.state.password || ''}
             />
           </label>
-          <button type="submit">Submit</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     );

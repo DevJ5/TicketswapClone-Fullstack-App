@@ -1,14 +1,18 @@
-import { ADD_USER } from '../actions/users';
+import { USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILED } from '../actions/users';
 
-const initState = {
-  data: [{ name: 'ryu' }, { name: 'cilia' }, { name: 'robby' }]
-};
+export default function(state = {}, { type, payload }) {
+  switch (type) {
+    case USER_SIGNUP_SUCCESS:
+      return {
+        success: true
+      };
 
-export default (state = initState, action = {}) => {
-  switch (action.type) {
-    case ADD_USER:
-      return action.payload;
+    case USER_SIGNUP_FAILED:
+      return {
+        error: payload
+      };
+
     default:
       return state;
   }
-};
+}

@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import EventsList from './EventsList';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class EventsListContainer extends Component {
+class EventsListContainer extends Component {
   render() {
+    if (!this.props.authenticated) return <Redirect to="/logins" />;
+
     return (
       <div>
         <EventsList />
@@ -10,3 +14,9 @@ export default class EventsListContainer extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  authenticated: state.currentUser
+});
+
+export default connect(mapStateToProps)(EventsListContainer);
