@@ -19,8 +19,10 @@ import Ticket from '../entities/Ticket';
 export default class TicketController {
   @Get('/events/:id/tickets')
   async getAllTickets() {
-    const tickets = await Ticket.find();
-    return { tickets };
+    // const tickets = await Ticket.findAndCount({ select: ['price'], where: "event_id = 13"});
+    const tickets = await Ticket.findAndCount();
+    //return { tickets: tickets[1] };
+    return {tickets}
   }
 
   @Get('/events/:eventId/tickets/:ticketId')
