@@ -8,6 +8,8 @@ class TicketDetailsContainer extends Component {
   componentDidMount() {
     const { eventId, ticketId } = this.props.match.params;
     this.props.getSingleTicket(eventId, ticketId);
+
+    // get fraud risk
   }
   render() {
     console.log('TicketDetailsContainer', this.props);

@@ -10,7 +10,7 @@ const setTicket = ticket => ({
 
 export const getSingleTicket = (eventId, ticketId) => dispatch => {
   request
-    .get(`${baseUrl}/events/${eventId}/tickets/${ticketId}`) // WE NEED EVENTID AS AN ARGUMENT
+    .get(`${baseUrl}/events/${eventId}/tickets/${ticketId}`)
     .then(res => dispatch(setTicket(res.body)))
     .catch(err => console.error(err));
 };
