@@ -12,6 +12,9 @@ import {
   Delete
 } from 'routing-controllers';
 import Event from '../entities/Event';
+import { getConnection } from 'typeorm';
+import { getManager, getRepository } from "typeorm";
+
 
 @JsonController()
 export default class EventController {
@@ -20,13 +23,24 @@ export default class EventController {
     //const { password, ...rest } = user;
     //console.log(rest); // Still to remove
     const events = await Event.find(); // { select: ['name'] }
-    return  events ;
+    return events;
   }
 
-  @Get('/events/:id')
-  async getEvent(@Param('id') id: number) {
-    const event = await Event.findOne(id);
-    return event;
+  @Get('/events/:eventId')
+  async getEvent(@Param('eventId') eventId: number) {
+    // const events = await connection
+    //   .getRepository(Event)
+    //   .createQueryBuilder("event")
+    //   .leftJoinAndSelect("event.tickets", "ticket")
+    //   .getMany();
+   // const event = await Event.findOne(eventId, { relations: ['tickets'] });
+   // return getConnection().manager.find(Event)
+    //return getManager().find(Event);
+   // return getRepository(Event).find()
+    // return events;
+    // return getRepository(Event).createQueryBuilder('event').leftJoinAndSelect('event.tickets', 'ticket').getMany()
+    return getRepository(Event).createQueryBuilder('event').where('event.id = :id', { id: eventId})
+    .leftJoinAndSelect('event.tickets', 'ticket').leftJoinAndSelect('ticket.user', 'user').getOne()
   }
 
   @Authorized('ADMIN')
@@ -58,8 +72,8 @@ export default class EventController {
   @Delete('/events/:id')
   async deleteEvent(@Param('id') id: number) {
     const event = await Event.findOne(id);
-    if(!event) throw new BadRequestError('Event does not exist')
-    
-    return Event.remove(event)
+    if (!event) throw new BadRequestError('Event does not exist');
+
+    return Event.remove(event);
   }
 }

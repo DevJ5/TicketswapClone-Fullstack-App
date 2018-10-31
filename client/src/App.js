@@ -7,12 +7,13 @@ import EventsListContainer from './components/events/EventsListContainer';
 import LogoutPage from './components/logout/LogoutPage';
 import Topbar from './components/layout/Topbar';
 import EventDetailsContainer from './components/events/EventDetailsContainer';
+import TicketDetailsContainer from './components/tickets/TicketDetailsContainer';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
+        <nav className="nav-wrapper red darken-3">
           <Topbar />
         </nav>
         <main>
@@ -21,6 +22,12 @@ class App extends Component {
           <Route exact path="/events" component={EventsListContainer} />
           <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/events/:id" component={EventDetailsContainer} />
+          <Route
+            exact
+            path="/events/:eventId/tickets/:ticketId"
+            component={TicketDetailsContainer}
+          />
+
           <Route exact path="/" render={() => <Redirect to="/events" />} />
         </main>
       </div>

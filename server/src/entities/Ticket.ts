@@ -35,7 +35,7 @@ export default class Ticket extends BaseEntity {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
-  @ManyToOne(_ => User, user => user.tickets)
+  @ManyToOne(_ => User, user => user.tickets) // {eager: true}
   user: User;
 
   @ManyToOne(_ => Event, event => event.tickets, { onDelete: 'CASCADE' })

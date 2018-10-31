@@ -29,7 +29,7 @@ export default class TicketController {
   @Get('/events/:eventId/tickets/:ticketId')
   async getTicket(@Params() routeParams) {
     const { ticketId } = routeParams;
-    return Ticket.findOne(ticketId, { relations: ['event'] });
+    return Ticket.findOne(ticketId, { relations: ['comments', 'comments.user'] });
   }
 
   @Authorized()

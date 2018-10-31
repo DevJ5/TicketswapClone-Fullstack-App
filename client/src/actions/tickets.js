@@ -1,16 +1,16 @@
 import * as request from 'superagent';
 import { baseUrl } from '../constants';
 
-export const SET_TICKETS = 'SET_TICKETS';
+export const SET_TICKET = 'SET_TICKET';
 
-const setTickets = tickets => ({
-  type: SET_TICKETS,
-  payload: tickets
+const setTicket = ticket => ({
+  type: SET_TICKET,
+  payload: ticket
 });
 
-export const getAllTickets = eventId => dispatch => {
+export const getSingleTicket = (eventId, ticketId) => dispatch => {
   request
-    .get(`${baseUrl}/events/${eventId}/tickets`) // WE NEED EVENTID AS AN ARGUMENT
-    .then(res => dispatch(setTickets(res.body)))
+    .get(`${baseUrl}/events/${eventId}/tickets/${ticketId}`) // WE NEED EVENTID AS AN ARGUMENT
+    .then(res => dispatch(setTicket(res.body)))
     .catch(err => console.error(err));
 };

@@ -30,7 +30,7 @@ export default class CommentController {
   }
 
   @Authorized('ADMIN')
-  @Post('/events/:eventId/tickets/:ticketId/comments')
+  @Post('/events/:eventId/tickets/:ticketId')
   @HttpCode(201)
   async addComment(@CurrentUser() user, @Params() routeParams, @Body() data) {
     const { eventId, ticketId } = routeParams;
