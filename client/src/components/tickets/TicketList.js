@@ -4,19 +4,24 @@ import { Link } from 'react-router-dom';
 export default function TicketList(props) {
   console.log('TicketList: ', props);
   return (
-    <div>
-      <h1>All tickets:</h1>
+    <div className="col s12 m8">
       <ul>
         {props.eventDetails.tickets.map(ticket => (
-          <li key={ticket.id}>
-            <Link to={`/events/${props.eventDetails.id}/tickets/${ticket.id}`}>
-              <span>{ticket.user.firstName} - </span>
-              <span>{ticket.user.lastName} - </span>
-              <span>{ticket.description} - </span>
-              <span>{ticket.price} - </span>
-              <img src={ticket.pictureUrl} alt="" />
-            </Link>
-          </li>
+          <Link
+            key={ticket.id}
+            to={`/events/${props.eventDetails.id}/tickets/${ticket.id}`}>
+            <li className="card-panel hoverable">
+              <span>
+                Name: {ticket.user.firstName} {ticket.user.lastName}
+              </span>
+              <br />
+              <span>Description: {ticket.description} </span>
+              <br />
+              <img src={ticket.pictureUrl} alt="" width="100" height="auto" />
+              <br />
+              <span>Price: {ticket.price}</span>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>

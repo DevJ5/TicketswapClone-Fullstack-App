@@ -6,7 +6,7 @@ function Topbar(props) {
   return (
     <div>
       <button
-        className="logOutButton right"
+        className="logOutButton waves-effect waves-light btn grey darken-4 right"
         onClick={() => {
           props.history.push('/logout');
         }}>

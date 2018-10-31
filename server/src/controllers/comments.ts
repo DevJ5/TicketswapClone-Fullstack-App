@@ -29,11 +29,12 @@ export default class CommentController {
     return comment;
   }
 
-  @Authorized('ADMIN')
+ // @Authorized('ADMIN')
   @Post('/events/:eventId/tickets/:ticketId')
   @HttpCode(201)
   async addComment(@CurrentUser() user, @Params() routeParams, @Body() data) {
     const { eventId, ticketId } = routeParams;
+    console.log('eventId', eventId, '-', 'ticketId', ticketId, '-', 'data: ', data)
     const { title, content } = data;
     const event = await Event.findOne(eventId);
     if (!event) throw new BadRequestError('Event does not exist');

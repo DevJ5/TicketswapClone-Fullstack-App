@@ -13,15 +13,21 @@ class TicketDetailsContainer extends Component {
     this.props.getRisk(eventId, ticketId);
   }
   render() {
+    const { eventId, ticketId } = this.props.match.params;
     console.log('TicketDetailsContainer', this.props);
     if (!this.props.ticketDetails) return null;
     return (
-      <div>
+      <div className="container">
         <TicketDetails
           ticketDetails={this.props.ticketDetails}
           risk={this.props.risk}
         />
-        <CommentsListContainer ticketDetails={this.props.ticketDetails} />
+        <div className="divider" />
+        <CommentsListContainer
+          eventId={eventId}
+          ticketId={ticketId}
+          ticketDetails={this.props.ticketDetails}
+        />
       </div>
     );
   }

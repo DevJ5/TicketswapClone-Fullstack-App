@@ -2,14 +2,13 @@ import React from 'react';
 
 export default function TicketDetails(props) {
   return (
-    <div>
-      <h1>Ticket:</h1>
-      <h3>{props.ticketDetails.price}</h3>
-      <h3>{props.ticketDetails.description}</h3>
-      <h3>
-        Fraud risk:
-        {props.risk} %
-      </h3>
+    <div className="ticket-details card blue-grey darken-1  white-text">
+      <h2>Ticket:</h2>
+      <p>Price: {props.ticketDetails.price}</p>
+      <p>Description: {props.ticketDetails.description}</p>
+      <p>
+        <b>Fraud risk is {props.risk} %</b>
+      </p>
     </div>
   );
 }

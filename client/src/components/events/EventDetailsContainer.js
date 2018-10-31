@@ -15,7 +15,10 @@ class EventDetailsContainer extends Component {
     return (
       <div>
         <EventDetails eventDetails={this.props.eventDetails} />
-        <TicketListContainer eventDetails={this.props.eventDetails} />
+        <TicketListContainer
+          eventDetails={this.props.eventDetails}
+          eventId={this.props.match.params.id}
+        />
       </div>
     );
   }

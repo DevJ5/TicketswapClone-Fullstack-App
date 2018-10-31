@@ -3,6 +3,10 @@
 }
 
 .logOutButton, .signUpButton {
-  margin: 20px;
+  margin: 15px 20px;
+}
+
+.ticket-details {
+  padding: 10px 20px;
 }
 
