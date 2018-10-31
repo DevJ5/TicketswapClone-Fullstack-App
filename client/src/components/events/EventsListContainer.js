@@ -3,6 +3,7 @@ import EventsList from './EventsList';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAllEvents } from '../../actions/events';
+import EventForm from './EventForm';
 
 class EventsListContainer extends Component {
   componentDidMount() {
@@ -13,7 +14,12 @@ class EventsListContainer extends Component {
     console.log('Eventslistcontainer', this.props);
     if (!this.props.authenticated) return <Redirect to="/logins" />;
     if (!this.props.events) return null;
-    return <div>{<EventsList events={this.props.events} />}</div>;
+    return (
+      <div className="container row">
+        <EventsList events={this.props.events} />
+        <EventForm />
+      </div>
+    );
   }
 }
 

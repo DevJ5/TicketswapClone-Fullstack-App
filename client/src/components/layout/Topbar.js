@@ -6,6 +6,7 @@ function Topbar(props) {
   return (
     <div>
       <button
+        className="logOutButton right"
         onClick={() => {
           props.history.push('/logout');
         }}>

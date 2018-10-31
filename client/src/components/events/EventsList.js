@@ -5,13 +5,14 @@ export default function EventsList(props) {
   console.log(props);
   if (!props.events) return null;
   return (
-    <div>
+    <div className="col s12 m8">
       <h1>Events:</h1>
-      <ul>
+      <ul className="collection">
         {props.events.map(event => (
           <Link to={`/events/${event.id}`} key={event.id}>
-            <li>
-              <span>{event.name}</span>
+            <li className="collection-item avatar hoverable">
+              <img src={event.pictureUrl} alt="" className="circle" />
+              <span className="title">{event.name}</span>
               <br />
               <span>{event.description}</span>
               <br />
@@ -19,6 +20,7 @@ export default function EventsList(props) {
               <br />
               <span>{event.endDate}</span>
               <br />
+              <div className="divider" />
             </li>
           </Link>
         ))}

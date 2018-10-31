@@ -15,8 +15,8 @@ import {
 import Event from '../entities/Event';
 import Ticket from '../entities/Ticket';
 import { getRepository } from 'typeorm';
-import User from '../entities/User';
 import Comment from '../entities/Comment';
+import calculateRisk from '../lib/calculateRisk'
 
 @JsonController()
 export default class TicketController {
@@ -44,70 +44,25 @@ export default class TicketController {
     const ticket = await Ticket.findOne(ticketId, { relations: ['user'] });
     if (!ticket) throw new BadRequestError('Ticket does not exist');
 
-    console.log(Date.parse(ticket.createdAt));
-    console.log('Hour:', new Date(Date.parse(ticket.createdAt)).getHours());
-    const hourOfCreation = new Date(Date.parse(ticket.createdAt)).getHours();
-
-    console.log(new Date(ticket.createdAt));
     const avgPrice = await getRepository(Ticket)
-      .createQueryBuilder('ticket')
-      .select('AVG(price) AS average')
-      .where('event_id = :id', { id: eventId })
-      .getRawOne();
-
-    console.log(avgPrice);
-
+    .createQueryBuilder('ticket')
+    .select('AVG(price) AS average')
+    .where('event_id = :id', { id: eventId })
+    .getRawOne();
+    
     const numberOfTicketsObj = await getRepository(Ticket)
-      .createQueryBuilder('ticket')
-      .select('COUNT(user_id) AS count')
-      .where('user_id = :id', { id: ticket.user.id })
-      .getRawOne();
+    .createQueryBuilder('ticket')
+    .select('COUNT(user_id) AS count')
+    .where('user_id = :id', { id: ticket.user.id })
+    .getRawOne();
+    
+    const hourOfCreation = new Date(Date.parse(ticket.createdAt)).getHours();
 
     const numberOfCommentsObj = await getRepository(Comment)
       .createQueryBuilder('comment')
       .select('COUNT(ticket_id) AS count')
       .where('ticket_id = :id', { id: ticketId })
       .getRawOne();
-
-    console.log(numberOfCommentsObj);
-
-    function calculateRisk(
-      ticketPrice: number,
-      avgPrice: number,
-      numberOfTickets: number,
-      hourOfCreation: number,
-      numberOfComments: number
-    ): number {
-      let risk = 0;
-      if (numberOfTickets === 1) risk += 10;
-
-      if (ticketPrice < avgPrice) risk += (1 - ticketPrice / avgPrice) * 100;
-
-      if (ticketPrice > avgPrice) {
-        if (ticketPrice / avgPrice > 1.1) {
-          risk -= 10;
-        } else {
-          risk -= (1.1 - ticketPrice / avgPrice) * 100;
-        }
-      }
-      if (hourOfCreation >= 9 && hourOfCreation <= 17) risk -= 10;
-      else risk += 10;
-
-      if (numberOfComments > 3) risk += 5;
-
-      if (risk < 5) risk = 5;
-      if (risk > 95) risk = 95;
-      return risk;
-    }
-
-    console.log(numberOfTicketsObj.count);
-    console.log(
-      ticket.price,
-      avgPrice.average,
-      numberOfTicketsObj.count,
-      hourOfCreation,
-      numberOfCommentsObj.count
-    );
 
     return calculateRisk(
       ticket.price,

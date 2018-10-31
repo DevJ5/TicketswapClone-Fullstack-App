@@ -16,6 +16,7 @@ class Loginpage extends Component {
       <div>
         {!this.props.signup.success && (
           <button
+            className="right signUpButton"
             onClick={() => {
               this.props.history.push('/signup');
             }}>

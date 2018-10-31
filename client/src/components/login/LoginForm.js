@@ -20,7 +20,7 @@ export default class Loginform extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <form onSubmit={this.handleSubmit}>
           <label>
             Email:
