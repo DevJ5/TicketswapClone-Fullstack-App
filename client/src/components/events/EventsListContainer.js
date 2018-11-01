@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import EventsList from './EventsList';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAllEvents } from '../../actions/events';
 import EventForm from './EventForm';
@@ -8,16 +7,15 @@ import EventForm from './EventForm';
 class EventsListContainer extends Component {
   componentDidMount() {
     this.props.getAllEvents();
-    console.log('component mounted', this.props);
   }
+
   render() {
-    console.log('Eventslistcontainer', this.props);
-    if (!this.props.authenticated) return <Redirect to="/logins" />;
-    if (!this.props.events) return null;
+    if (!this.props.allEvents) return null;
     return (
       <div className="container row">
-        <EventsList events={this.props.events} />
-        <EventForm />
+        <EventsList allEvents={this.props.allEvents} />
+        {this.props.authenticated && <EventForm />}
+        {!this.props.authenticated && <p className="col s2 m4">Log in to create an event</p>}
       </div>
     );
   }
@@ -25,7 +23,7 @@ class EventsListContainer extends Component {
 
 const mapStateToProps = state => ({
   authenticated: state.currentUser !== null,
-  events: state.events
+  allEvents: state.allEvents
 });
 
 export default connect(

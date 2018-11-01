@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
 import Loginform from './LoginForm';
-import { login } from '../../actions/users';
+import { postLogin } from '../../actions/users';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 class Loginpage extends Component {
-  handleSubmit = data => {
-    const { email, password } = data;
-    this.props.loginPost(email, password);
+  handleSubmit = credentials => {
+    this.props.postLogin(credentials);
   };
 
   render() {
-    if (this.props.currentUser) return <Redirect to="/events" />;
+    if (this.props.authenticated) return <Redirect to="/events" />;
     return (
       <div>
-        {!this.props.signup.success && (
-          <button
-            className="right signUpButton"
-            onClick={() => {
-              this.props.history.push('/signup');
-            }}>
-            Signup
-          </button>
-        )}
         <Loginform onSubmit={this.handleSubmit} />
       </div>
     );
@@ -31,10 +21,10 @@ class Loginpage extends Component {
 
 const mapStateToProps = state => ({
   signup: state.signup,
-  currentUser: state.currentUser
+  authenticated: state.currentUser !== null
 });
 
 export default connect(
   mapStateToProps,
-  { loginPost: login }
+  { postLogin }
 )(Loginpage);

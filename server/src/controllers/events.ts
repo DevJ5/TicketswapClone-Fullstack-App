@@ -19,15 +19,17 @@ import { getManager, getRepository } from "typeorm";
 @JsonController()
 export default class EventController {
   @Get('/events')
-  async getAllEvents(@CurrentUser() user) {
-    //const { password, ...rest } = user;
-    //console.log(rest); // Still to remove
-    const events = await Event.find(); // { select: ['name'] }
+  async getAllEvents() {
+    const events = await Event.find();
     return events;
   }
 
-  @Get('/events/:eventId')
-  async getEvent(@Param('eventId') eventId: number) {
+  @Get('/events/:eventId') // gets a single event with all related tickets and their respective users
+  async getSingleEvent(@Param('eventId') eventId: number) :Promise<Event> {
+    const event =  await Event.findOne(eventId, { relations: ['tickets', 'tickets.user'] })
+    if(!event) throw new BadRequestError('Event does not exist')
+    return event
+     // { select: ['name'] }
     // const events = await connection
     //   .getRepository(Event)
     //   .createQueryBuilder("event")
@@ -39,8 +41,8 @@ export default class EventController {
    // return getRepository(Event).find()
     // return events;
     // return getRepository(Event).createQueryBuilder('event').leftJoinAndSelect('event.tickets', 'ticket').getMany()
-    return getRepository(Event).createQueryBuilder('event').where('event.id = :id', { id: eventId})
-    .leftJoinAndSelect('event.tickets', 'ticket').leftJoinAndSelect('ticket.user', 'user').getOne()
+    // return getRepository(Event).createQueryBuilder('event').where('event.id = :id', { id: eventId})
+    // .leftJoinAndSelect('event.tickets', 'ticket').leftJoinAndSelect('ticket.user', 'user').getOne()
   }
 
   @Authorized('ADMIN')

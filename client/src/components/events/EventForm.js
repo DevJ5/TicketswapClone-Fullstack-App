@@ -75,6 +75,7 @@ class EventForm extends Component {
           <button className="btn waves-effect waves-light" type="submit">
             Add Event
           </button>
+          <p>Only administrators can create events.</p>
         </form>
       </div>
     );

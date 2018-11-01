@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class Loginform extends Component {
+class Loginform extends Component {
   state = {};
 
   handleChange = e => {
@@ -41,8 +43,18 @@ export default class Loginform extends Component {
             />
           </label>
           <button type="submit">Login</button>
+          <button
+            onClick={() => {
+              this.props.history.push('/signup');
+            }}>
+            Signup
+          </button>
         </form>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({});
+
+export default withRouter(connect(mapStateToProps)(Loginform));

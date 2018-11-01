@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
 import './App.css';
+import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import SignupPage from './components/signup/SignupPage';
+import Topbar from './components/layout/Topbar';
+import SignUpPage from './components/signup/SignUpPage';
 import LoginPage from './components/login/LoginPage';
 import EventsListContainer from './components/events/EventsListContainer';
-import LogoutPage from './components/logout/LogoutPage';
-import Topbar from './components/layout/Topbar';
 import EventDetailsContainer from './components/events/EventDetailsContainer';
 import TicketDetailsContainer from './components/tickets/TicketDetailsContainer';
+import LogoutPage from './components/logout/LogoutPage';
 
 class App extends Component {
   render() {
@@ -17,17 +17,16 @@ class App extends Component {
           <Topbar />
         </nav>
         <main>
-          <Route exact path="/signup" component={SignupPage} />
+          <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/logins" component={LoginPage} />
           <Route exact path="/events" component={EventsListContainer} />
-          <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/events/:id" component={EventDetailsContainer} />
           <Route
             exact
             path="/events/:eventId/tickets/:ticketId"
             component={TicketDetailsContainer}
           />
-
+          <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/" render={() => <Redirect to="/events" />} />
         </main>
       </div>

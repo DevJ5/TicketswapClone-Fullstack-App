@@ -1,18 +1,18 @@
 import { combineReducers } from 'redux';
-import events from './events';
+import allEvents from './allEvents';
 import signup from './signup';
 import login from './login';
 import currentUser from './currentUser';
-import eventDetails from './eventDetails';
+import singleEvent from './singleEvent';
 import ticketDetails from './ticketDetails';
 import risk from './risk';
 
 export default combineReducers({
-  events,
+  allEvents,
   signup,
   login,
   currentUser,
-  eventDetails,
+  singleEvent,
   ticketDetails,
   risk
 });

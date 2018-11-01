@@ -1,3 +1,4 @@
+
 .addEventForm {
   margin-top: 130px;
 }
@@ -8,5 +9,9 @@
 
 .ticket-details {
   padding: 10px 20px;
+}
+
+.comment-form {
+  margin-top: 90px;
 }
 

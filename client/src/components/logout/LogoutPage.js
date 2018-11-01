@@ -9,9 +9,7 @@ class LogoutPage extends Component {
   }
 
   render() {
-    console.log('top of render logoutpage', this.props);
     if (this.props.currentUser) return null;
-    console.log('render op logoutpage', this.props);
     return <Redirect to="/" />;
   }
 }

@@ -28,7 +28,6 @@ const app = createKoaServer({
       if(token) {
         const userId = verify(token).data.id
         const user = await User.findOne(userId)
-        console.log('roliones', roles)
         if(user && !roles.length) return true
         if(user && roles.find(role => user.roles === role)) return true
       }

@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function EventsList(props) {
-  console.log(props);
-  if (!props.events) return null;
+  if (!props.allEvents) return null;
   return (
     <div className="col s12 m8">
-      <h1>Events:</h1>
+      <h2>Events:</h2>
       <ul className="collection">
-        {props.events.map(event => (
+        {props.allEvents.map(event => (
           <Link to={`/events/${event.id}`} key={event.id}>
             <li className="collection-item avatar hoverable">
               <img src={event.pictureUrl} alt="" className="circle" />

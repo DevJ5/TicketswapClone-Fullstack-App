@@ -11,12 +11,12 @@ class EventDetailsContainer extends Component {
   }
 
   render() {
-    if (!this.props.eventDetails) return null;
+    if (!this.props.singleEvent) return null;
     return (
       <div>
-        <EventDetails eventDetails={this.props.eventDetails} />
+        <EventDetails singleEvent={this.props.singleEvent} />
         <TicketListContainer
-          eventDetails={this.props.eventDetails}
+          singleEvent={this.props.singleEvent}
           eventId={this.props.match.params.id}
         />
       </div>
@@ -25,7 +25,7 @@ class EventDetailsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  eventDetails: state.eventDetails
+  singleEvent: state.singleEvent
 });
 
 export default connect(

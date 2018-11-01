@@ -6,3 +6,25 @@ Solution is not to use database errors, but use validation library instead (like
 - Get all events dingen verwijderen.
 
 export default connect(mapStateToProps, {getEvent, deleteEvent})(withStyles(styles)(EventDetails));
+
+    // const tickets = await Ticket.findAndCount({ select: ['price'], where: "event_id = 13"});
+    //const tickets = await Ticket.findAndCount();
+    //return { tickets: tickets[1] };
+
+        // 1. The average price of a ticket
+    const avgPrice = event.tickets.reduce((acc, cur) => {
+      console.log(acc)
+      return acc + cur.price
+    }, 0) / event.tickets.length
+
+    // 2. How many tickets does a user have
+    // Find tickets per user
+    const tickets = await Ticket.find({where: {user: 3 }})
+    const hello = await event.tickets.map(ticket => Ticket.find({where: {user: ticket.user.id}}))
+    console.log(hello)
+    //console.log("All the TIckets:" ,tickets)
+    //await Ticket.findAndCount({ select: ['price'], where: "event_id = 13" });
+
+    //event.tickets.forEach(ticket => ticket['risk'] ="aanwezig")
+
+        // if (!this.props.authenticated) return <Redirect to="/logins" />;

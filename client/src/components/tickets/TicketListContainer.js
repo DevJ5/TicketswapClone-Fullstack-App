@@ -5,16 +5,18 @@ import TicketForm from './TicketForm';
 
 class TicketListContainer extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="container row">
-        <TicketList eventDetails={this.props.eventDetails} />
-        <TicketForm eventId={this.props.eventId} />
+        <TicketList singleEvent={this.props.singleEvent} />
+        {this.props.authenticated && <TicketForm eventId={this.props.eventId} />}
+        {!this.props.authenticated && <p className="col s2 m4">Log in to sell your tickets.</p>}
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  authenticated: state.currentUser !== null
+});
 
 export default connect(mapStateToProps)(TicketListContainer);

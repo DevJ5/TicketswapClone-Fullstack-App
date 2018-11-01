@@ -30,10 +30,10 @@ export const logout = () => ({
   type: USER_LOGOUT
 });
 
-export const signup = (firstName, lastName, email, password) => dispatch => {
+export const postSignUp = signUpData => dispatch => {
   request
     .post(`${baseUrl}/users`)
-    .send({ firstName, lastName, email, password })
+    .send(signUpData)
     .then(_ => dispatch(userSignupSuccess()))
     .catch(err => {
       console.log(err.response);
@@ -43,10 +43,10 @@ export const signup = (firstName, lastName, email, password) => dispatch => {
     });
 };
 
-export const login = (email, password) => dispatch => {
+export const postLogin = credentials => dispatch => {
   request
     .post(`${baseUrl}/logins`)
-    .send({ email, password })
+    .send(credentials)
     .then(res => dispatch(userLoginSuccess(res.body.jwt)))
     .catch(err => {
       if (err.status === 400) {

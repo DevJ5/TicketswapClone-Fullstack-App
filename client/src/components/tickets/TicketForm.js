@@ -17,12 +17,11 @@ class TicketForm extends Component {
     this.setState({
       price: '',
       description: '',
-      pictureUrl: ''
+      pictureUrl: null
     });
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="col s12 m4">
         <form onSubmit={this.handleSubmit}>
@@ -56,6 +55,7 @@ class TicketForm extends Component {
           <button className="btn waves-effect waves-light" type="submit">
             Add Ticket
           </button>
+          
         </form>
       </div>
     );

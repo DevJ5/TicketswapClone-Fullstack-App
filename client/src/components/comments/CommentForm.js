@@ -23,7 +23,7 @@ class EventForm extends Component {
   render() {
     return (
       <div className="col s12 m4">
-        <form onSubmit={this.handleSubmit}>
+        <form className="comment-form" onSubmit={this.handleSubmit}>
           <label>
             Title:
             <input
@@ -35,8 +35,9 @@ class EventForm extends Component {
           </label>
           <label>
             Content:
-            <input
-              type="text"
+            <textarea
+              rows="10"
+              cols="50"
               name="content"
               value={this.state.content || ''}
               onChange={this.handleChange}

@@ -24,7 +24,10 @@ export default class Ticket extends BaseEntity {
   @Column('text', { nullable: false })
   description: string;
 
-  @Column('text', { nullable: true })
+  @Column('text', {
+    nullable: true,
+    default: 'https://www.wwkd.org/wp-content/uploads/2018/08/tickets.png'
+  })
   pictureUrl: string;
 
   @Exclude()

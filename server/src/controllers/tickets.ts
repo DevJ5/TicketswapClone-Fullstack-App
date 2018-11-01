@@ -17,16 +17,16 @@ import Ticket from '../entities/Ticket';
 import { getRepository } from 'typeorm';
 import Comment from '../entities/Comment';
 import calculateRisk from '../lib/calculateRisk'
+import User from '../entities/User';
 
 @JsonController()
 export default class TicketController {
   @Get('/events/:eventId/tickets')
   async getAllTickets(@Param('eventId') eventId: number) {
-    // const tickets = await Ticket.findAndCount({ select: ['price'], where: "event_id = 13"});
-    //const tickets = await Ticket.findAndCount();
-    //return { tickets: tickets[1] };
-    const event = await Event.findOne(eventId, { relations: ['tickets'] });
-    return event;
+    const event = await Event.findOne(eventId, { relations: ['tickets', 'tickets.user'] });
+    if(!event) throw new BadRequestError('Event does not exist')
+    
+    return event 
   }
 
   @Get('/events/:eventId/tickets/:ticketId')
@@ -74,15 +74,16 @@ export default class TicketController {
   }
 
   @Authorized()
-  @Post('/events/:id/tickets')
+  @Post('/events/:eventId/tickets')
   @HttpCode(201)
   async addTicket(
-    @Param('id') id: number,
-    @CurrentUser() user,
+    @Param('eventId') eventId: number,
+    @CurrentUser() user: User,
     @Body() data: Ticket
   ) {
+    console.log(user);
     const { price, description, pictureUrl } = data;
-    const event = await Event.findOne(id);
+    const event = await Event.findOne(eventId);
     if (!event) throw new BadRequestError('Event does not exist');
 
     const ticket = await Ticket.create({
