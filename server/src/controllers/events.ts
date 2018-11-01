@@ -12,33 +12,33 @@ import {
   Delete
 } from 'routing-controllers';
 import Event from '../entities/Event';
-import { getConnection } from 'typeorm';
-import { getManager, getRepository } from "typeorm";
-
+import { getRepository } from 'typeorm';
 
 @JsonController()
 export default class EventController {
   @Get('/events')
-  async getAllEvents() {
-    const events = await Event.find();
-    return events;
+  async getAllEvents(): Promise<Event[]> {
+    const today = new Date().toISOString().split('T')[0]
+    return getRepository(Event).createQueryBuilder('event').where('event.startDate >= :date', { date: today }).getMany()
   }
 
   @Get('/events/:eventId') // gets a single event with all related tickets and their respective users
-  async getSingleEvent(@Param('eventId') eventId: number) :Promise<Event> {
-    const event =  await Event.findOne(eventId, { relations: ['tickets', 'tickets.user'] })
-    if(!event) throw new BadRequestError('Event does not exist')
-    return event
-     // { select: ['name'] }
+  async getSingleEvent(@Param('eventId') eventId: number): Promise<Event> {
+    const event = await Event.findOne(eventId, {
+      relations: ['tickets', 'tickets.user']
+    });
+    if (!event) throw new BadRequestError('Event does not exist');
+    return event;
+    // { select: ['name'] }
     // const events = await connection
     //   .getRepository(Event)
     //   .createQueryBuilder("event")
     //   .leftJoinAndSelect("event.tickets", "ticket")
     //   .getMany();
-   // const event = await Event.findOne(eventId, { relations: ['tickets'] });
-   // return getConnection().manager.find(Event)
+    // const event = await Event.findOne(eventId, { relations: ['tickets'] });
+    // return getConnection().manager.find(Event)
     //return getManager().find(Event);
-   // return getRepository(Event).find()
+    // return getRepository(Event).find()
     // return events;
     // return getRepository(Event).createQueryBuilder('event').leftJoinAndSelect('event.tickets', 'ticket').getMany()
     // return getRepository(Event).createQueryBuilder('event').where('event.id = :id', { id: eventId})

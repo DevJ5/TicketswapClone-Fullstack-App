@@ -97,14 +97,16 @@ export default class TicketController {
     return ticket;
   }
 
-  @Authorized('ADMIN')
+  @Authorized()
   @Put('/events/:eventId/tickets/:ticketId')
   async updateTicket(
-    @Param('ticketId') ticketId,
+    @CurrentUser() user: User,
+    @Param('ticketId') ticketId: number,
     @Body() update: Partial<Ticket>
   ) {
-    const ticket = await Ticket.findOne(ticketId);
+    const ticket = await Ticket.findOne(ticketId, {relations: ['user']});
     if (!ticket) throw new BadRequestError('Ticket does not exist');
+    if(user.id !== ticket.user.id) throw new BadRequestError('This is not your ticket')
 
     return Ticket.merge(ticket, update).save();
   }
