@@ -21,11 +21,23 @@ import User from '../entities/User';
 
 @JsonController()
 export default class TicketController {
+  @Get('/tickets')
+  async getAllTicketsWithUser() {
+    const tickets = await Ticket.find({
+    join: {
+      alias: "ticket",
+      leftJoinAndSelect: {
+      user: "ticket.user"
+    }}})
+
+    return tickets
+  }
+
   @Get('/events/:eventId/tickets')
-  async getAllTickets(@Param('eventId') eventId: number) {
+  async getAllTicketsPerEvent(@Param('eventId') eventId: number) {
     const event = await Event.findOne(eventId, { relations: ['tickets', 'tickets.user'] });
     if(!event) throw new BadRequestError('Event does not exist')
-    
+  
     return event 
   }
 

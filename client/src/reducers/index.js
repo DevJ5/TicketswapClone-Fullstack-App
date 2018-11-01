@@ -6,6 +6,7 @@ import currentUser from './currentUser';
 import singleEvent from './singleEvent';
 import ticketDetails from './ticketDetails';
 import risk from './risk';
+import allTickets from './allTickets'
 
 export default combineReducers({
   allEvents,
@@ -14,5 +15,6 @@ export default combineReducers({
   currentUser,
   singleEvent,
   ticketDetails,
-  risk
+  risk,
+  allTickets
 });

@@ -30,7 +30,6 @@ export default class Ticket extends BaseEntity {
   })
   pictureUrl: string;
 
-  @Exclude()
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 

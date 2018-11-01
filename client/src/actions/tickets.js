@@ -4,12 +4,19 @@ import { isExpired } from '../jwt';
 import { logout } from '../actions/users';
 
 export const SET_TICKET = 'SET_TICKET';
+export const SET_TICKETS = 'SET_TICKETS';
 export const SET_RISK = 'SET_RISK';
 export const ADD_TICKET = 'ADD_TICKET';
+export const ADD_RISK = 'ADD_RISK';
 
 const setTicket = ticket => ({
   type: SET_TICKET,
   payload: ticket
+});
+
+const setAllTickets = tickets => ({
+  type: SET_TICKETS,
+  payload: tickets
 });
 
 const setRisk = risk => ({
@@ -21,6 +28,18 @@ const addTicket = ticket => ({
   type: ADD_TICKET,
   payload: ticket
 });
+
+export const addRisk = props => ({
+  type: ADD_RISK,
+  payload: props
+});
+
+export const getAllTickets = () => dispatch => {
+  request
+    .get(`${baseUrl}/tickets`)
+    .then(res => dispatch(setAllTickets(res.body)))
+    .catch(err => console.error(err));
+};
 
 export const getSingleTicket = (eventId, ticketId) => dispatch => {
   request

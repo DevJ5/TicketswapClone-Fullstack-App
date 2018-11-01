@@ -2,8 +2,6 @@ The error you have (Duplicate entry 'lodddrem@ipsum.com' for key 'email') is giv
 
 Solution is not to use database errors, but use validation library instead (like TODO:class-validator), create a separate validation logic and provide a good messages.
 
-- Minlength aanzetten bij password.
-- Get all events dingen verwijderen.
 
 export default connect(mapStateToProps, {getEvent, deleteEvent})(withStyles(styles)(EventDetails));
 
@@ -28,3 +26,18 @@ export default connect(mapStateToProps, {getEvent, deleteEvent})(withStyles(styl
     //event.tickets.forEach(ticket => ticket['risk'] ="aanwezig")
 
         // if (!this.props.authenticated) return <Redirect to="/logins" />;
+
+            // { select: ['name'] }
+    // const events = await connection
+    //   .getRepository(Event)
+    //   .createQueryBuilder("event")
+    //   .leftJoinAndSelect("event.tickets", "ticket")
+    //   .getMany();
+    // const event = await Event.findOne(eventId, { relations: ['tickets'] });
+    // return getConnection().manager.find(Event)
+    //return getManager().find(Event);
+    // return getRepository(Event).find()
+    // return events;
+    // return getRepository(Event).createQueryBuilder('event').leftJoinAndSelect('event.tickets', 'ticket').getMany()
+    // return getRepository(Event).createQueryBuilder('event').where('event.id = :id', { id: eventId})
+    // .leftJoinAndSelect('event.tickets', 'ticket').leftJoinAndSelect('ticket.user', 'user').getOne()
