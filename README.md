@@ -1,0 +1,1 @@
+A fullstack application where users can signup and sell tickets to events. This project has a backend that is written in TypeScript with TypeORM and a postgres database. The front end is React with Redux. For styling Materialize.css was used.
