@@ -29,7 +29,7 @@ export default class CommentController {
     return comment;
   }
 
- // @Authorized('ADMIN')
+  @Authorized('ADMIN')
   @Post('/events/:eventId/tickets/:ticketId')
   @HttpCode(201)
   async addComment(@CurrentUser() user, @Params() routeParams, @Body() data) {
