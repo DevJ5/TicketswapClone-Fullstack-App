@@ -3,56 +3,50 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 class Loginform extends Component {
-  state = {};
+	state = {};
 
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
+	handleChange = e => {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	};
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
-    this.setState({
-      email: '',
-      password: ''
-    });
-  };
+	handleSubmit = e => {
+		e.preventDefault();
+		this.props.onSubmit(this.state);
+		this.setState({
+			email: '',
+			password: ''
+		});
+	};
 
-  render() {
-    return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Email:
-            <input
-              type="text"
-              name="email"
-              onChange={this.handleChange}
-              value={this.state.email || ''}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type="password"
-              name="password"
-              onChange={this.handleChange}
-              value={this.state.password || ''}
-            />
-          </label>
-          <button type="submit">Login</button>
-          <button
-            onClick={() => {
-              this.props.history.push('/signup');
-            }}>
-            Signup
-          </button>
-        </form>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="container">
+				<form onSubmit={this.handleSubmit}>
+					<label>
+						Email:
+						<input
+							type="text"
+							name="email"
+							onChange={this.handleChange}
+							value={this.state.email || ''}
+						/>
+					</label>
+					<label>
+						Password:
+						<input
+							type="password"
+							name="password"
+							onChange={this.handleChange}
+							value={this.state.password || ''}
+						/>
+					</label>
+					<button type="submit">Login</button>
+				</form>
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => ({});
