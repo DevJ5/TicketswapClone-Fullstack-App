@@ -4,10 +4,10 @@ A fullstack application where users can signup and sell tickets to events. This 
 
 ## To run:
 
-Client: Yarn install - yarn start.
+Client: `yarn install` - `yarn start`.
 
 Server: Create a database and update the connection string. 
-Yarn install - yarn start.
+`yarn install` - `yarn start`.
 
 Create an account with a password that is at least 8 characters.
 
