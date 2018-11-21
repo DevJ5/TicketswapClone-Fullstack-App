@@ -37,7 +37,7 @@ export default () =>
     type: "postgres",
     url:
       process.env.DATABASE_URL ||
-      "postgres://postgres:secret@localhost:5432/uber_tickets",
+      "postgres://postgres:secret@localhost:5432/uber_tickets2",
     entities: [User, Event, Ticket, Comment],
     synchronize: true,
     logging: true,

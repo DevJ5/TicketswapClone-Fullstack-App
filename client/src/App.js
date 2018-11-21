@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Topbar from './components/layout/Topbar';
-import SignUpPage from './components/signup/SignUpPage';
+import SignUpPage from './components/signup/SignupPage';
 import LoginPage from './components/login/LoginPage';
 import EventsListContainer from './components/events/EventsListContainer';
 import EventDetailsContainer from './components/events/EventDetailsContainer';
