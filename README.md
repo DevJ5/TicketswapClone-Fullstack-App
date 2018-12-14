@@ -14,7 +14,7 @@ yarn start
 yarn install
 yarn start
 
-Create an account with a password that is at least 8 characters.
+# Create an account with a password that is at least 8 characters.
 
-Only users with the role 'ADMIN' can create events.
+# Only users with the role 'ADMIN' can create events.
 ```
